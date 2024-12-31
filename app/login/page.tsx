@@ -1,60 +1,38 @@
 'use client'
-import { useState, FormEvent } from 'react'
-import Logo from '@/components/Logo'
-import Button from '@/components/Button'
-import Input from '@/components/Input'
-import Link from 'next/link'
-import type { LoginFormData } from '@/types'
+import { useRouter } from 'next/navigation';
+import { CustomButton } from '@/components/atoms/CustomButton';
+import { FormInput } from '@/components/atoms/FormInput';
+import { FormCard } from '@/components/Molecules/FormCard';
+import { AuthLayout } from '@/components/Organisms/AuthLayout';
 
 export default function Login() {
-  const [formData, setFormData] = useState<LoginFormData>({
-    email: '',
-    password: ''
-  })
+  const router = useRouter();
 
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log(formData)
-  }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Your form validation or API call logic goes here
+
+    // On successful login, navigate to the dashboard
+    router.push('/dashboard');
+  };
 
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4">
-      <div className="space-y-6 max-w-md w-full">
-        <div className="text-center">
-          <Logo />
-          <h1 className="text-2xl font-bold mt-6">Login</h1>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <Input
-            label="Email"
-            id="email"
-            type="email"
-            required
-            value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
-          />
-          <Input
-            label="Password"
-            id="password"
-            type="password"
-            required
-            value={formData.password}
-            onChange={(e) => setFormData({...formData, password: e.target.value})}
-          />
-          
-          <Button type="submit" variant="primary" className="w-full">
-            Login
-          </Button>
+    <AuthLayout>
+      <FormCard title="Login">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <FormInput id="email" label="Email" type="email" required name={''} />
+          <FormInput id="password" label="Password" type="password" required name={''} />
+
+          <div className="flex justify-center space-x-4">
+            {/* Remove onClick from submit button */}
+            <CustomButton type="submit">Login</CustomButton>
+            <CustomButton color="gray" onClick={() => router.push('/')}>
+              Back to Home
+            </CustomButton>
+          </div>
         </form>
-        
-        <div className="text-center">
-          <Link href="/">
-            <Button variant="link">Back to Home</Button>
-          </Link>
-        </div>
-      </div>
-    </main>
-  )
+      </FormCard>
+    </AuthLayout>
+  );
 }

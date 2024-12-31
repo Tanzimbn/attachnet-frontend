@@ -24,7 +24,7 @@ export default function WelcomePage() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/login">
+            <Link href="/logintemp">
               <button className="w-full sm:w-auto px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg 
                                hover:bg-indigo-700 transform hover:-translate-y-0.5 transition-all duration-200
                                focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">

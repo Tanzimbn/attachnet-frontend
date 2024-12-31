@@ -1,30 +1,31 @@
-import Logo from '@/components/Logo'
-import Button from '@/components/Button'
-import Link from 'next/link'
+'use client'
+import { useRouter } from 'next/navigation';
+import { CustomButton } from '@/components/atoms/CustomButton';
+import { FormCard } from '@/components/Molecules/FormCard';
+import { AuthLayout } from '@/components/Organisms/AuthLayout';
 
 export default function SignUp() {
+  const router = useRouter();
+
   return (
-    <main className="min-h-screen flex flex-col items-center justify-center p-4">
-      <div className="text-center space-y-6 max-w-md w-full">
-        <Logo />
-        <h1 className="text-2xl font-bold">Choose Registration Type</h1>
-        
-        <div className="space-y-4">
-          <Link href="/signup/student" className="block">
-            <Button variant="primary" className="w-full">
-              Register as Student
-            </Button>
-          </Link>
-          <Link href="/signup/teacher" className="block">
-            <Button variant="primary" className="w-full">
-              Register as Teacher
-            </Button>
-          </Link>
-          <Link href="/">
-            <Button variant="link">Back to Home</Button>
-          </Link>
-        </div>
-      </div>
-    </main>
-  )
+    <AuthLayout>
+      <FormCard title="Choose Registration Type">
+  <div className="flex justify-center space-x-4">
+    <CustomButton onClick={() => router.push('/signup/student')}>
+      Register as Student
+    </CustomButton>
+    <CustomButton onClick={() => router.push('/signup/teacher')}>
+      Register as Teacher
+    </CustomButton>
+  </div>
+  <div className="flex justify-center mt-4">
+    <CustomButton color="gray" onClick={() => router.push('/')}>
+      Back to Home
+    </CustomButton>
+  </div>
+</FormCard>
+
+
+    </AuthLayout>
+  );
 }

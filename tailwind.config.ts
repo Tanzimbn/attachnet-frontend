@@ -1,18 +1,18 @@
-import type { Config } from "tailwindcss";
-
-export default {
+module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './node_modules/flowbite-react/**/*.js',
+    './pages/**/*.{ts,tsx}',
+    './components/**/*.{ts,tsx}',
+    './app/**/*.{ts,tsx}',
+    './src/**/*.{ts,tsx}',
   ],
   theme: {
     extend: {
-      colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+      fontFamily: {
+        sans: ['Roboto', 'sans-serif'], // Replace with your Google Font
+        // custom: ['"CustomFont"', 'sans-serif'], // Add local custom font
       },
     },
   },
-  plugins: [],
-} satisfies Config;
+  plugins: [require('flowbite/plugin')],
+}
