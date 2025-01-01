@@ -1,6 +1,5 @@
 // components/molecules/FormField/FormField.tsx
 import { Input } from '@/components/atoms/Input';
-import { PasswordInput } from '@/components/atoms/PasswordInput';
 import { Label } from '@/components/atoms/Labeltemp';
 
 interface FormFieldProps {
@@ -9,6 +8,9 @@ interface FormFieldProps {
   type?: string;
   required?: boolean;
   error?: string;
+  success?: boolean;
+  register?: any; // for react-hook-form
+  placeholder?: string;
   [key: string]: any;
 }
 
@@ -18,6 +20,9 @@ export const FormField: React.FC<FormFieldProps> = ({
   type = 'text',
   required = false,
   error,
+  success,
+  register,
+  placeholder,
   ...props
 }) => {
   return (
@@ -25,24 +30,37 @@ export const FormField: React.FC<FormFieldProps> = ({
       <Label htmlFor={name} required={required}>
         {label}
       </Label>
-      {type === 'password' ? (
-        <PasswordInput
+      <div className="relative">
+        <input
           id={name}
-          name={name}
-          error={error}
-          required={required}
-          {...props}
-        />
-      ) : (
-        <Input
-          id={name}
-          name={name}
           type={type}
-          error={error}
-          required={required}
+          className={`w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2
+            ${error 
+              ? 'border-red-500 focus:ring-red-200' 
+              : 'border-gray-300 focus:ring-indigo-200'
+            }
+            ${success && 'border-green-500'}`}
+          placeholder={placeholder}
+          {...register(name)}
           {...props}
         />
-      )}
+        {success && (
+          <svg
+            className="absolute right-3 top-1/2 -translate-y-1/2 h-5 w-5 text-green-500"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
+        )}
+      </div>
+      {error && <p className="mt-1 text-sm text-red-500">{error}</p>}
     </div>
   );
 };

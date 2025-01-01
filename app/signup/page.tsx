@@ -1,31 +1,34 @@
-'use client'
-import { useRouter } from 'next/navigation';
-import { CustomButton } from '@/components/atoms/CustomButton';
-import { FormCard } from '@/components/Molecules/FormCard';
-import { AuthLayout } from '@/components/Organisms/AuthLayout';
+// app/signup/page.tsx
+import { AuthLayout } from '@/components/AuthLayout';
+import { SignupRedirect } from '@/components/Organisms/SignupRedirect';
+import { RoleCard } from '@/components/Molecules/RoleCard';
+import { AcademicCapIcon, UserGroupIcon } from '@heroicons/react/24/outline';
 
-export default function SignUp() {
-  const router = useRouter();
-
+export default function SignupPage() {
   return (
-    <AuthLayout>
-      <FormCard title="Choose Registration Type">
-  <div className="flex justify-center space-x-4">
-    <CustomButton onClick={() => router.push('/signup/student')}>
-      Register as Student
-    </CustomButton>
-    <CustomButton onClick={() => router.push('/signup/teacher')}>
-      Register as Teacher
-    </CustomButton>
-  </div>
-  <div className="flex justify-center mt-4">
-    <CustomButton color="gray" onClick={() => router.push('/')}>
-      Back to Home
-    </CustomButton>
-  </div>
-</FormCard>
+    <AuthLayout
+      title="Create Account"
+      subtitle="Choose your role to get started"
+    >
+      <div className="space-y-6 sm:space-y-8 py-4">
+        <RoleCard
+          title="Student"
+          description="Sign up as a student to access course materials"
+          icon={<AcademicCapIcon className="h-6 w-6 text-indigo-600" />}
+          href="/signup/student"
+          variant="primary"
+        />
 
+        <RoleCard
+          title="Teacher"
+          description="Sign up as a teacher to manage courses"
+          icon={<UserGroupIcon className="h-6 w-6 text-indigo-600" />}
+          href="/signup/teacher"
+          variant="outline"
+        />
+      </div>
 
+      <SignupRedirect />
     </AuthLayout>
   );
 }
