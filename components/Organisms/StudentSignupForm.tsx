@@ -41,20 +41,17 @@ export const StudentSignupForm = () => {
       });
 
       if (!response.ok) {
-        // Try to parse as JSON first
         let errorMessage;
         const contentType = response.headers.get('content-type');
-        
+
         try {
           if (contentType && contentType.includes('application/json')) {
             const errorData = await response.json();
             errorMessage = errorData.message || errorData.error || 'An unexpected error occurred';
           } else {
-            // If not JSON or JSON parsing fails, get as text
             errorMessage = await response.text();
           }
         } catch (e) {
-          // If JSON parsing fails, try to get as text
           errorMessage = await response.text();
         }
 
@@ -63,7 +60,7 @@ export const StudentSignupForm = () => {
 
       setSubmitSuccess(true);
       reset(); // Clear form on success
-      // Optional: Redirect user or show success message
+      window.location.href = '/dashboard';
     } catch (error) {
       setApiError(error instanceof Error ? error.message : 'An unexpected error occurred');
       setSubmitSuccess(false);

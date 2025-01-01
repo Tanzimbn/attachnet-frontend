@@ -1,4 +1,6 @@
 // app/login/page.tsx
+'use client';
+
 import { AuthLayout } from '@/components/AuthLayout';
 import { LoginForm } from '@/components/Organisms/LoginForm';
 

@@ -40,7 +40,6 @@ export const TeacherSignupForm = () => {
       });
 
       if (!response.ok) {
-        // Try to parse as JSON first
         let errorMessage;
         const contentType = response.headers.get('content-type');
         
@@ -49,11 +48,9 @@ export const TeacherSignupForm = () => {
             const errorData = await response.json();
             errorMessage = errorData.message || errorData.error || 'An unexpected error occurred';
           } else {
-            // If not JSON or JSON parsing fails, get as text
             errorMessage = await response.text();
           }
         } catch (e) {
-          // If JSON parsing fails, try to get as text
           errorMessage = await response.text();
         }
 
@@ -62,7 +59,7 @@ export const TeacherSignupForm = () => {
 
       setSubmitSuccess(true);
       reset();
-      // Optional: Redirect user or show success message
+      window.location.href = '/dashboard';
     } catch (error) {
       setApiError(error instanceof Error ? error.message : 'An unexpected error occurred');
       setSubmitSuccess(false);

@@ -1,9 +1,9 @@
 // app/page.tsx
 'use client';
 
-import { Logo } from '@/components/atoms/Logo';
 import Image from 'next/image';
 import Link from 'next/link';
+import { Button } from '@/components/atoms/Button';
 
 export default function WelcomePage() {
   return (
@@ -17,28 +17,30 @@ export default function WelcomePage() {
               AttachNet
             </span>
           </h1>
-          
+
           <p className="text-gray-600 text-lg mb-8">
-            Your gateway to amazing experiences. Join our community today and discover
-            what makes us special.
+            Simplify industrial attachments for students and teachers. Easily manage groups, track placements, and monitor applications in one platform.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/login">
-              <button className="w-full sm:w-auto px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg 
-                               hover:bg-indigo-700 transform hover:-translate-y-0.5 transition-all duration-200
-                               focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
+            <Link href="/login" className="w-full sm:w-auto">
+              <Button
+                variant="primary"
+                fullWidth
+                className="transform hover:-translate-y-0.5"
+              >
                 Login
-              </button>
+              </Button>
             </Link>
 
-            <Link href="/signup">
-              <button className="w-full sm:w-auto px-8 py-3 bg-white text-indigo-600 font-semibold rounded-lg 
-                               border-2 border-indigo-600 hover:bg-indigo-50 transform hover:-translate-y-0.5 
-                               transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-indigo-500 
-                               focus:ring-offset-2">
+            <Link href="/signup" className="w-full sm:w-auto">
+              <Button
+                variant="outline"
+                fullWidth
+                className="transform hover:-translate-y-0.5"
+              >
                 Sign Up
-              </button>
+              </Button>
             </Link>
           </div>
         </div>

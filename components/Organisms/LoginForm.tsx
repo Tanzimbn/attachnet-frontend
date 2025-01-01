@@ -36,7 +36,7 @@ export const LoginForm = () => {
     setApiError(null);
 
     try {
-      const response = await fetch('/api/auth/login', {
+      const response = await fetch('http://localhost:8080/api/v1/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -45,20 +45,16 @@ export const LoginForm = () => {
       });
 
       if (!response.ok) {
-        // Try to parse as JSON first
         const contentType = response.headers.get('content-type');
         let errorMessage;
-        
         try {
           if (contentType && contentType.includes('application/json')) {
             const errorData = await response.json();
             errorMessage = errorData.message || errorData.error || 'An unexpected error occurred';
           } else {
-            // If not JSON or JSON parsing fails, get as text
             errorMessage = await response.text();
           }
         } catch (e) {
-          // If JSON parsing fails, try to get as text
           errorMessage = await response.text();
         }
 
@@ -66,7 +62,7 @@ export const LoginForm = () => {
       }
 
       // Handle successful login
-      window.location.href = '/dashboard'; // Or use Next.js router
+      window.location.href = '/dashboard';
     } catch (error) {
       console.error('Login error:', error);
       setApiError(error instanceof Error ? error.message : 'Failed to login');
